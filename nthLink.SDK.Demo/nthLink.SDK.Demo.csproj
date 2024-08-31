@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Platforms>x64;x86</Platforms>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<SelfContained>false</SelfContained>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\nthLink.Header\nthLink.Header.csproj" />
+		<ProjectReference Include="..\nthLink.SDK\nthLink.SDK.csproj" />
+	</ItemGroup>
+
+	<Target Name="TeonPostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="IF EXIST &quot;..\Library\$(PlatformTarget)\nfapi.dll&quot; ( COPY /Y &quot;..\Library\$(PlatformTarget)\nfapi.dll&quot; &quot;$(TargetDir)nfapi.dll&quot; )" />
+		<Exec Command="IF EXIST &quot;..\Library\$(PlatformTarget)\nfdriver.sys&quot; ( COPY /Y &quot;..\Library\$(PlatformTarget)\nfdriver.sys&quot; &quot;$(TargetDir)nfdriver.sys&quot; )" />
+		<Exec Command="IF EXIST &quot;..\Library\$(PlatformTarget)\Redirector.dll&quot; ( COPY /Y &quot;..\Library\$(PlatformTarget)\Redirector.dll&quot; &quot;$(TargetDir)Redirector.dll&quot; )" />
+		<Exec Command="IF EXIST &quot;..\Library\$(PlatformTarget)\rootGo.dll&quot; ( COPY /Y &quot;..\Library\$(PlatformTarget)\rootGo.dll&quot; &quot;$(TargetDir)rootGo.dll&quot; )" />
+		<Exec Command="IF EXIST &quot;..\Library\$(PlatformTarget)\rootGo.h&quot; ( COPY /Y &quot;..\Library\$(PlatformTarget)\rootGo.h&quot; &quot;$(TargetDir)rootGo.h&quot; )" />
+		<Exec Command="IF EXIST &quot;..\Library\$(PlatformTarget)\leaf.dll&quot; ( COPY /Y &quot;..\Library\$(PlatformTarget)\leaf.dll&quot; &quot;$(TargetDir)leaf.dll&quot; )" />
+	</Target>
+</Project>
